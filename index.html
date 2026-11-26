@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>JeleBondhu · জেলেবন্ধু — Near-real-time advisory prototype (Bangladesh EEZ)</title>
+<meta name="description" content="Transparent environmental-suitability, safety and sustainability filters for the Bangladesh EEZ. Research prototype.">
+<meta name="theme-color" content="#0b2a4a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<header class="hdr">
+  <img src="assets/img/icon-96.png" alt="JeleBondhu logo" width="42" height="42">
+  <div class="ttl"><span id="appname">জেলেবন্ধু</span><small id="tag"></small></div>
+  <a class="pill" id="litelink" href="fisher.html" style="text-decoration:none"></a>
+  <button class="pill" id="langbtn">English</button>
+</header>
+<div class="banners" id="banners"></div>
+<div class="dash">
+  <section>
+    <div class="ctrl">
+      <label><span id="lb_port"></span><select id="selPort"></select></label>
+      <label><span id="lb_vessel"></span><select id="selVessel"></select></label>
+      <label><span id="lb_dep"></span><select id="selDep"></select></label>
+      <label><span id="lb_layer"></span><select id="selLayer"></select></label>
+    </div>
+    <div class="mapwrap" id="mapwrap">
+      <canvas id="map" tabindex="0" aria-label="Map of advisory classes"></canvas>
+      <div class="mapbtns"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zfit" aria-label="Reset">⌂</button></div>
+      <div class="legend" id="legend"></div>
+      <div class="maptip" id="tip"></div>
+      <div class="mapnote">GEBCO bathymetry · offline map</div>
+    </div>
+  </section>
+  <aside>
+    <div class="tabs" id="tabs"></div>
+    <div class="panel" id="panel"><p class="muted">…</p></div>
+  </aside>
+</div>
+<div class="foot" id="foot"></div>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
