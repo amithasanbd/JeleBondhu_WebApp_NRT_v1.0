@@ -1,0 +1,77 @@
+name: BMD bulletin update (human-verified)
+# There is no machine-readable BMD API. A person reads the official Marine Warning / Fishermen Forecast pages,
+# then runs this workflow ("Run workflow" button) to record what they saw. The record expires after 24 h (config) -
+# after that the app stops issuing FAVOURABLE/CAUTION advice until it is refreshed.
+on:
+  workflow_dispatch:
+    inputs:
+      classification:
+        description: "Overall BMD classification for the whole EEZ"
+        type: choice
+        options: [none, cautionary, warning, great_danger]
+        default: none
+      verified_by:
+        description: "Your name / initials (appears publicly in the data panel)"
+        required: true
+      issued_at:
+        description: "REQUIRED official bulletin issue timestamp e.g. 2026-11-26T09:00:00+06:00"
+        required: true
+        type: string
+      source_url:
+        description: "REQUIRED actual official BMD bulletin URL (https://*.bmd.gov.bd/...)"
+        required: true
+        type: string
+      verified_confirmation:
+        description: "Type I_CHECKED_BMD after reading the dated official bulletin"
+        required: true
+        type: string
+      valid_hours:
+        description: "Hours the bulletin is valid"
+        default: "12"
+      areas:
+        description: 'Optional JSON list of area overrides, e.g. [{"bbox":[lon0,lat0,lon1,lat1],"classification":"warning","label":"North Bay"}]'
+        default: "[]"
+      signal:
+        description: "Local/maritime signal number if any"
+        default: ""
+      headline_en:
+        default: ""
+      headline_bn:
+        default: ""
+permissions:
+  contents: write
+  actions: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install -r backend/requirements.txt
+      - name: Write record
+        env:
+          CLASSIFICATION: ${{ inputs.classification }}
+          VERIFIED_BY: ${{ inputs.verified_by }}
+          VALID_HOURS: ${{ inputs.valid_hours }}
+          ISSUED_AT: ${{ inputs.issued_at }}
+          SOURCE_URL: ${{ inputs.source_url }}
+          CONFIRMATION: ${{ inputs.verified_confirmation }}
+          AREAS: ${{ inputs.areas }}
+          SIGNAL: ${{ inputs.signal }}
+          HEAD_EN: ${{ inputs.headline_en }}
+          HEAD_BN: ${{ inputs.headline_bn }}
+        run: |
+          test "$CONFIRMATION" = "I_CHECKED_BMD" || { echo "Official bulletin review not attested"; exit 2; }
+          PYTHONPATH=backend python -m jelebondhu.cli bmd-record \
+            --issued-at "$ISSUED_AT" --source-url "$SOURCE_URL" --classification "$CLASSIFICATION" --verified-by "$VERIFIED_BY" --valid-hours "$VALID_HOURS" \
+            --areas "$AREAS" --signal "$SIGNAL" --headline-en "$HEAD_EN" --headline-bn "$HEAD_BN"
+      - name: Commit and trigger a fresh advisory run
+        run: |
+          git config user.name "jelebondhu-bot"; git config user.email "bot@users.noreply.github.com"
+          git add data/manual/bmd_bulletin.json
+          git commit -m "BMD record verified" || echo "no change"
+          git push
+          gh workflow run nrt.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
