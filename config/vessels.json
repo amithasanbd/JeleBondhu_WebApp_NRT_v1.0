@@ -1,0 +1,48 @@
+{
+  "_status": "PROVISIONAL - wave/wind limits carried over from the JeleBondhu R2 prototype; gust, visibility, speed, trip length and range are engineering placeholders. Bangladesh-specific vessel validation (BFRI / DoF / Dept. of Shipping / fisher consultation) is required before any operational use.",
+  "default_vessel": "mechanized",
+  "vessels": {
+    "small": {
+      "label_en": "Small artisanal boat",
+      "label_bn": "ছোট নৌকা (ইঞ্জিন ছাড়া/ছোট ইঞ্জিন)",
+      "icon": "small",
+      "speed_kn": 5.0,
+      "fishing_hours": 8,
+      "max_range_nm": 25,
+      "hazards": {
+        "wave_height_m": {"safe": 1.2, "stop": 2.0},
+        "wind_speed_ms": {"safe": 10.0, "stop": 15.0},
+        "wind_gust_ms": {"safe": 14.0, "stop": 20.0},
+        "visibility_km": {"safe": 5.0, "stop": 1.0}
+      }
+    },
+    "mechanized": {
+      "label_en": "Mechanized fishing boat",
+      "label_bn": "ইঞ্জিনচালিত মাছ ধরার নৌকা",
+      "icon": "mech",
+      "speed_kn": 7.0,
+      "fishing_hours": 24,
+      "max_range_nm": 70,
+      "hazards": {
+        "wave_height_m": {"safe": 1.8, "stop": 2.8},
+        "wind_speed_ms": {"safe": 13.0, "stop": 18.0},
+        "wind_gust_ms": {"safe": 18.0, "stop": 24.0},
+        "visibility_km": {"safe": 4.0, "stop": 1.0}
+      }
+    },
+    "trawler": {
+      "label_en": "Large trawler",
+      "label_bn": "বড় ট্রলার",
+      "icon": "trawler",
+      "speed_kn": 8.0,
+      "fishing_hours": 48,
+      "max_range_nm": 250,
+      "hazards": {
+        "wave_height_m": {"safe": 2.4, "stop": 3.5},
+        "wind_speed_ms": {"safe": 16.0, "stop": 22.0},
+        "wind_gust_ms": {"safe": 21.0, "stop": 29.0},
+        "visibility_km": {"safe": 3.0, "stop": 0.8}
+      }
+    }
+  }
+}

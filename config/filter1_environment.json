@@ -1,0 +1,326 @@
+{
+  "_status": "PROVISIONAL RECONSTRUCTION. The four sub-index weights and the VI orientation come from the supplied thesis release (science.json: PFZI 0.2553, PPI 0.1441, OHI 0.1925, VI 0.4081; PAI = weighted sum with VI entering as 1-VI, which reproduces the 2025 station PAI with r=0.976). The component membership functions below are NOT the frozen thesis functions (they were not in the supplied files). Replace 'components' and 'classes.frozen' with the thesis constants, then implement and independently test the exact frozen-model adapter; this version never claims frozen PAI. Until then every Filter-1 output is labelled EXPERIMENTAL.",
+  "mode": "experimental",
+  "label_experimental_en": "Experimental environmental ranking (not the validated thesis PAI)",
+  "label_experimental_bn": "পরীক্ষামূলক পরিবেশগত র‍্যাংকিং (যাচাইকৃত থিসিস PAI নয়)",
+  "label_frozen_en": "Thesis PAI (frozen calibration)",
+  "output_meaning": "relative environmental suitability for fishing - NOT a probability of catching fish",
+  "subindices": {
+    "PFZI": {
+      "weight": 0.2552906951,
+      "invert": false,
+      "name": "PFZ suitability"
+    },
+    "PPI": {
+      "weight": 0.1440755526,
+      "invert": false,
+      "name": "Productivity potential"
+    },
+    "OHI": {
+      "weight": 0.1925173813,
+      "invert": false,
+      "name": "Ocean hydrographic condition"
+    },
+    "VI": {
+      "weight": 0.408116371,
+      "invert": true,
+      "name": "Vulnerability / stress (enters as 1-VI)"
+    }
+  },
+  "components": [
+    {
+      "id": "sst_thermal",
+      "sub": "PFZI",
+      "var": "sst",
+      "w": 0.25,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          24.0,
+          27.0,
+          30.0,
+          32.0
+        ]
+      }
+    },
+    {
+      "id": "sst_front",
+      "sub": "PFZI",
+      "var": "sst_front",
+      "w": 0.25,
+      "fn": {
+        "type": "linear",
+        "p": [
+          0.0,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "convergence",
+      "sub": "PFZI",
+      "var": "convergence",
+      "w": 0.15,
+      "fn": {
+        "type": "linear",
+        "p": [
+          0.0,
+          5e-06
+        ]
+      }
+    },
+    {
+      "id": "current_speed",
+      "sub": "PFZI",
+      "var": "current_speed",
+      "w": 0.1,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          0.0,
+          0.1,
+          0.5,
+          1.0
+        ]
+      }
+    },
+    {
+      "id": "sss_band",
+      "sub": "PFZI",
+      "var": "sss",
+      "w": 0.1,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          20.0,
+          28.0,
+          33.5,
+          35.5
+        ]
+      }
+    },
+    {
+      "id": "depth_habitat",
+      "sub": "PFZI",
+      "var": "depth",
+      "w": 0.15,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          5.0,
+          20.0,
+          150.0,
+          1000.0
+        ]
+      }
+    },
+    {
+      "id": "chl",
+      "sub": "PPI",
+      "var": "chl",
+      "w": 0.3,
+      "fn": {
+        "type": "log_linear",
+        "p": [
+          0.1,
+          3.0
+        ]
+      }
+    },
+    {
+      "id": "npp",
+      "sub": "PPI",
+      "var": "nppv",
+      "w": 0.2,
+      "fn": {
+        "type": "log_linear",
+        "p": [
+          1.0,
+          40.0
+        ]
+      }
+    },
+    {
+      "id": "no3",
+      "sub": "PPI",
+      "var": "no3",
+      "w": 0.15,
+      "fn": {
+        "type": "linear",
+        "p": [
+          0.0,
+          3.0
+        ]
+      }
+    },
+    {
+      "id": "po4",
+      "sub": "PPI",
+      "var": "po4",
+      "w": 0.1,
+      "fn": {
+        "type": "linear",
+        "p": [
+          0.0,
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "chl_front",
+      "sub": "PPI",
+      "var": "chl_front",
+      "w": 0.15,
+      "fn": {
+        "type": "linear",
+        "p": [
+          0.0,
+          0.02
+        ]
+      }
+    },
+    {
+      "id": "mld_shallow",
+      "sub": "PPI",
+      "var": "mlotst",
+      "w": 0.1,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          2.0,
+          8.0,
+          40.0,
+          80.0
+        ]
+      }
+    },
+    {
+      "id": "sss_hydro",
+      "sub": "OHI",
+      "var": "sss",
+      "w": 0.3,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          18.0,
+          26.0,
+          33.5,
+          35.5
+        ]
+      }
+    },
+    {
+      "id": "mld_hydro",
+      "sub": "OHI",
+      "var": "mlotst",
+      "w": 0.25,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          3.0,
+          10.0,
+          50.0,
+          100.0
+        ]
+      }
+    },
+    {
+      "id": "zos_anom",
+      "sub": "OHI",
+      "var": "zos_anom",
+      "w": 0.2,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          -0.4,
+          -0.1,
+          0.1,
+          0.4
+        ]
+      },
+      "needs_reference": true
+    },
+    {
+      "id": "sst_anom",
+      "sub": "OHI",
+      "var": "sst_anom",
+      "w": 0.25,
+      "fn": {
+        "type": "trapezoid",
+        "p": [
+          -3.0,
+          -1.0,
+          1.0,
+          3.0
+        ]
+      },
+      "needs_reference": true
+    },
+    {
+      "id": "o2_stress",
+      "sub": "VI",
+      "var": "o2",
+      "w": 0.35,
+      "fn": {
+        "type": "inv_linear",
+        "p": [
+          60.0,
+          180.0
+        ]
+      }
+    },
+    {
+      "id": "ph_stress",
+      "sub": "VI",
+      "var": "ph",
+      "w": 0.25,
+      "fn": {
+        "type": "inv_linear",
+        "p": [
+          7.85,
+          8.05
+        ]
+      }
+    },
+    {
+      "id": "thermal_stress",
+      "sub": "VI",
+      "var": "sst",
+      "w": 0.25,
+      "fn": {
+        "type": "linear",
+        "p": [
+          30.5,
+          32.5
+        ]
+      }
+    },
+    {
+      "id": "strat_stress",
+      "sub": "VI",
+      "var": "mlotst",
+      "w": 0.15,
+      "fn": {
+        "type": "inv_linear",
+        "p": [
+          3.0,
+          12.0
+        ]
+      }
+    }
+  ],
+  "classes": {
+    "_doc": "Class thresholds. 'frozen' mode uses fixed P60/P80 from the thesis development period. 'experimental' mode ranks within today's EEZ (top 20% = High, 60-80th percentile = Good) because no calibrated reference exists.",
+    "frozen": {
+      "p60": 0.583,
+      "p80": 0.626,
+      "source": "PLACEHOLDER derived from the 2025 station-season distribution (60th/80th percentile); replace with the development-period values"
+    },
+    "experimental_percentiles": {
+      "good": 60,
+      "high": 80
+    }
+  },
+  "min_component_weight_fraction": 0.5,
+  "drivers_top_n": 3
+}

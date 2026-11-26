@@ -1,0 +1,253 @@
+{
+ "_doc": "Reason codes. Index = bit position in the per-cell reason bitmask (<=31 codes so JS 32-bit ops work).",
+ "codes": [
+  {
+   "bit": 0,
+   "code": "WAVE_HIGH",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Waves too high for this boat",
+   "bn": "ঢেউ এই নৌকার জন্য অনেক বেশি উঁচু"
+  },
+  {
+   "bit": 1,
+   "code": "WIND_HIGH",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Wind too strong",
+   "bn": "বাতাস খুব জোরালো"
+  },
+  {
+   "bit": 2,
+   "code": "GUST_HIGH",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Strong gusts expected",
+   "bn": "দমকা বাতাসের ঝুঁকি আছে"
+  },
+  {
+   "bit": 3,
+   "code": "VIS_LOW",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Poor visibility",
+   "bn": "দৃশ্যমানতা কম (কুয়াশা/বৃষ্টি)"
+  },
+  {
+   "bit": 4,
+   "code": "THUNDER",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Thunderstorm expected",
+   "bn": "বজ্রসহ ঝড়ের সম্ভাবনা"
+  },
+  {
+   "bit": 5,
+   "code": "WINDOW_SHORT",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Safe-weather window is shorter than the whole trip",
+   "bn": "নিরাপদ আবহাওয়ার সময় পুরো যাত্রার চেয়ে কম"
+  },
+  {
+   "bit": 6,
+   "code": "WINDOW_MARGINAL",
+   "filter": "F2",
+   "severity": "warn",
+   "en": "Little spare time before weather worsens",
+   "bn": "আবহাওয়া খারাপ হওয়ার আগে হাতে সময় কম"
+  },
+  {
+   "bit": 7,
+   "code": "ROUTE_FAILED",
+   "filter": "F2",
+   "severity": "unknown",
+   "en": "Sea route could not be verified (distance is approximate)",
+   "bn": "সমুদ্রপথ যাচাই করা যায়নি (দূরত্ব আনুমানিক)"
+  },
+  {
+   "bit": 8,
+   "code": "HORIZON_SHORT",
+   "filter": "F2",
+   "severity": "warn",
+   "en": "Forecast does not cover the whole trip",
+   "bn": "পুরো যাত্রার পূর্বাভাস নেই"
+  },
+  {
+   "bit": 9,
+   "code": "VESSEL_RANGE",
+   "filter": "F2",
+   "severity": "info",
+   "en": "Too far for this boat",
+   "bn": "এই নৌকার জন্য অনেক দূর"
+  },
+  {
+   "bit": 10,
+   "code": "BMD_WARNING",
+   "filter": "F2",
+   "severity": "bad",
+   "en": "Official BMD warning in force for this area",
+   "bn": "এই এলাকায় আবহাওয়া অধিদপ্তরের সতর্কসংকেত আছে"
+  },
+  {
+   "bit": 11,
+   "code": "BMD_CAUTION",
+   "filter": "F2",
+   "severity": "warn",
+   "en": "BMD cautionary signal for this area",
+   "bn": "এই এলাকায় আবহাওয়া অধিদপ্তরের সতর্কতা আছে"
+  },
+  {
+   "bit": 12,
+   "code": "BMD_UNVERIFIED",
+   "filter": "F2",
+   "severity": "unknown",
+   "en": "Official BMD warning not verified - no safe clearance can be given",
+   "bn": "সরকারি (BMD) সতর্কবার্তা যাচাই হয়নি - নিরাপদ বলা যাচ্ছে না"
+  },
+  {
+   "bit": 13,
+   "code": "BAN_BOB_58D",
+   "filter": "F3",
+   "severity": "bad",
+   "en": "58-day Bay of Bengal marine fishing ban is in force",
+   "bn": "৫৮ দিনের সাগরে মাছ ধরা নিষেধাজ্ঞা চলছে"
+  },
+  {
+   "bit": 14,
+   "code": "BAN_HILSA_22D",
+   "filter": "F3",
+   "severity": "bad",
+   "en": "22-day mother-hilsa spawning ban is in force",
+   "bn": "২২ দিনের মা ইলিশ সংরক্ষণ নিষেধাজ্ঞা চলছে"
+  },
+  {
+   "bit": 15,
+   "code": "MPA_VERIFIED",
+   "filter": "F3",
+   "severity": "bad",
+   "en": "Inside a marine protected area",
+   "bn": "সুরক্ষিত সামুদ্রিক এলাকার ভেতরে"
+  },
+  {
+   "bit": 16,
+   "code": "MPA_UNVERIFIED",
+   "filter": "F3",
+   "severity": "unknown",
+   "en": "Inside a protected-area boundary that is not yet verified",
+   "bn": "সুরক্ষিত এলাকার সীমানার ভেতরে (সীমানা এখনও যাচাই হয়নি)"
+  },
+  {
+   "bit": 17,
+   "code": "MPA_BUFFER",
+   "filter": "F3",
+   "severity": "warn",
+   "en": "Close to a protected area",
+   "bn": "সুরক্ষিত এলাকার খুব কাছে"
+  },
+  {
+   "bit": 18,
+   "code": "VZ_PROHIBITED",
+   "filter": "F3",
+   "severity": "bad",
+   "en": "This vessel type is not allowed in this zone",
+   "bn": "এই ধরনের জাহাজের জন্য এই এলাকায় অনুমতি নেই"
+  },
+  {
+   "bit": 19,
+   "code": "VZ_UNRESOLVED",
+   "filter": "F3",
+   "severity": "unknown",
+   "en": "Vessel / licence rule for this zone is not confirmed",
+   "bn": "এই এলাকার জাহাজ/লাইসেন্স নিয়ম নিশ্চিত নয়"
+  },
+  {
+   "bit": 20,
+   "code": "RULES_STALE",
+   "filter": "F3",
+   "severity": "unknown",
+   "en": "Fishing-rules data is out of date",
+   "bn": "মাছ ধরার নিয়মের তথ্য পুরনো"
+  },
+  {
+   "bit": 21,
+   "code": "RULES_YEAR_UNAPPROVED",
+   "filter": "F3",
+   "severity": "unknown",
+   "en": "This year's ban dates are not yet confirmed",
+   "bn": "এ বছরের নিষেধাজ্ঞার তারিখ এখনও নিশ্চিত নয়"
+  },
+  {
+   "bit": 22,
+   "code": "NOT_WET",
+   "filter": "F1",
+   "severity": "info",
+   "en": "Not open sea (land or very shallow)",
+   "bn": "খোলা সমুদ্র নয় (স্থল বা খুব অগভীর)"
+  },
+  {
+   "bit": 23,
+   "code": "PAI_LOW",
+   "filter": "F1",
+   "severity": "warn",
+   "en": "Fish-finding conditions are weak here",
+   "bn": "এখানে মাছ পাওয়ার পরিবেশ দুর্বল"
+  },
+  {
+   "bit": 24,
+   "code": "ENV_EXPERIMENTAL",
+   "filter": "F1",
+   "severity": "info",
+   "en": "Experimental ranking, not the validated thesis score",
+   "bn": "পরীক্ষামূলক র‍্যাংকিং, যাচাইকৃত থিসিস স্কোর নয়"
+  },
+  {
+   "bit": 25,
+   "code": "CONF_LOW",
+   "filter": "DATA",
+   "severity": "unknown",
+   "en": "Data confidence too low - advisory withdrawn",
+   "bn": "তথ্যের নির্ভরযোগ্যতা খুব কম - পরামর্শ প্রত্যাহার"
+  },
+  {
+   "bit": 26,
+   "code": "CONF_CAP",
+   "filter": "DATA",
+   "severity": "warn",
+   "en": "Reduced data confidence",
+   "bn": "তথ্যের নির্ভরযোগ্যতা কম"
+  },
+  {
+   "bit": 27,
+   "code": "DATA_ENV_MISSING",
+   "filter": "DATA",
+   "severity": "unknown",
+   "en": "Ocean data missing",
+   "bn": "সমুদ্রের তথ্য পাওয়া যায়নি"
+  },
+  {
+   "bit": 28,
+   "code": "DATA_HAZARD_MISSING",
+   "filter": "DATA",
+   "severity": "unknown",
+   "en": "Weather data missing",
+   "bn": "আবহাওয়ার তথ্য পাওয়া যায়নি"
+  },
+  {
+   "bit": 29,
+   "code": "JATKA_RISK",
+   "filter": "F3",
+   "severity": "warn",
+   "en": "Jatka (young hilsa under 25 cm) must be released",
+   "bn": "জাটকা (২৫ সেমির কম ইলিশ) অবশ্যই ছেড়ে দিন"
+  },
+  {
+   "bit": 30,
+   "code": "IFA_TAG",
+   "filter": "F3",
+   "severity": "info",
+   "en": "Inshore fishing area (licence and gear rules apply)",
+   "bn": "উপকূলীয় মাছ ধরার এলাকা (লাইসেন্স ও জালের নিয়ম প্রযোজ্য)"
+  }
+ ]
+}

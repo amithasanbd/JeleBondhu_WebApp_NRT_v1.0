@@ -1,0 +1,26 @@
+{
+  "_status": "Implements U = G_MPA * G_season * G_zone * (u_buf * u_crowd * u_life)^(1/3) with crowding and life-stage terms NOT ASSESSED (no consented crowding data / no authoritative nursery polygons) - they are excluded from the geometric mean and reported as not_assessed, never silently scored as 'uncrowded'. Combination order of states: NO-GO > UNKNOWN > CAUTION > PASS.",
+  "mpa": {
+    "legal_status_effect": {
+      "verified": "NO-GO",
+      "gazette_verified": "NO-GO",
+      "gazette_provisional": "UNKNOWN",
+      "gazette_candidate": "UNKNOWN",
+      "candidate_geometry": "UNKNOWN",
+      "approximate_extent": "UNKNOWN"
+    },
+    "buffer_km": 10.0,
+    "buffer_caution_below_u": 0.5,
+    "buffer_applies_to": ["verified", "gazette_verified", "gazette_provisional", "gazette_candidate", "candidate_geometry"]
+  },
+  "ifa": {"tag_only": true},
+  "grounds": {"tag_only": true},
+  "crowding": {"assessed": false},
+  "life_stage": {"assessed": false},
+  "decision": {
+    "ranking_equation": "A = PAI * min(S, U)",
+    "priority": ["F3 NO-GO / BMD warning", "F2 NO-GO", "data gate", "F3 UNKNOWN", "CAUTION conditions", "SAFE"],
+    "safe_message_en": "Model-assessed conditions are favourable. Verify official advice before departure.",
+    "safe_is_not_guarantee": true
+  }
+}

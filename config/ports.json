@@ -1,0 +1,21 @@
+{
+  "_status": "APPROXIMATE landing-site and sea-entry coordinates (read from the study-area figure and public maps). Verify with local fishers/port authorities. 'entry' is the first open-water waypoint; the route from the landing site to the entry is not modelled (entry_offset_nm is added to distance).",
+  "ports": {
+    "dublar_char": {"name_en": "Dublar Char", "name_bn": "দুবলার চর", "site": "V1 Western Coast", "lat": 21.79, "lon": 89.57,
+                    "entry": {"lat": 21.52, "lon": 89.57}, "entry_offset_nm": 15},
+    "patharghata": {"name_en": "Patharghata (Barguna)", "name_bn": "পাথরঘাটা", "site": "Central Coast", "lat": 21.97, "lon": 90.07,
+                    "entry": {"lat": 21.50, "lon": 90.05}, "entry_offset_nm": 28},
+    "kuakata": {"name_en": "Kuakata / Alipur", "name_bn": "কুয়াকাটা / আলীপুর", "site": "V2 Central Coast", "lat": 21.81, "lon": 90.12,
+                "entry": {"lat": 21.62, "lon": 90.14}, "entry_offset_nm": 5},
+    "nijhum_dwip": {"name_en": "Nijhum Dwip", "name_bn": "নিঝুম দ্বীপ", "site": "Meghna estuary", "lat": 22.03, "lon": 91.05,
+                    "entry": {"lat": 21.72, "lon": 91.00}, "entry_offset_nm": 10},
+    "chattogram": {"name_en": "Chattogram (Karnaphuli)", "name_bn": "চট্টগ্রাম (কর্ণফুলী)", "site": "Eastern Coast", "lat": 22.23, "lon": 91.80,
+                   "entry": {"lat": 21.90, "lon": 91.68}, "entry_offset_nm": 18},
+    "cox_bazar": {"name_en": "Cox's Bazar", "name_bn": "কক্সবাজার", "site": "V3 Eastern Coast", "lat": 21.43, "lon": 91.98,
+                  "entry": {"lat": 21.43, "lon": 91.82}, "entry_offset_nm": 5},
+    "teknaf": {"name_en": "Teknaf", "name_bn": "টেকনাফ", "site": "Naf estuary", "lat": 20.87, "lon": 92.30,
+               "entry": {"lat": 20.80, "lon": 92.12}, "entry_offset_nm": 8},
+    "saint_martin": {"name_en": "Saint Martin's Island", "name_bn": "সেন্ট মার্টিন", "site": "Island", "lat": 20.63, "lon": 92.32,
+                     "entry": {"lat": 20.58, "lon": 92.18}, "entry_offset_nm": 3}
+  }
+}

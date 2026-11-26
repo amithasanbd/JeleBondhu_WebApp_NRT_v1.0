@@ -1,0 +1,11 @@
+{
+  "_status": "Implements the thesis equations s_k = clip((h_stop-h)/(h_stop-h_safe),0,1); s_phys = min_k s_k; R_T = d_out/v + T_fish + d_ret/v; M = (W-R_T)/R_T; S = G_BMD * min(s_phys, clip(M/0.25,0,1)). Vessel limits are PROVISIONAL (config/vessels.json).",
+  "hazards": ["wave_height_m", "wind_speed_ms", "wind_gust_ms", "visibility_km", "thunderstorm"],
+  "lower_is_worse": ["visibility_km"],
+  "thunderstorm_weather_codes": [95, 96, 99],
+  "margin_reference": 0.25,
+  "bad_threshold": 0.0,
+  "caution_below": 0.5,
+  "return_to_same_port": true,
+  "route_note": "Straight sea-lane from the port's sea-entry waypoint to the station, sampled every route_samples; every sample must be wet in GEBCO. If not, routing 'failed': an approximate distance is shown but the trip is never certified."
+}

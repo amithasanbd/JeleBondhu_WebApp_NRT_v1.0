@@ -1,0 +1,176 @@
+{
+  "release": "JB-NRT-1.2.0-7DAY-OUTLOOK",
+  "timezone": "Asia/Dhaka",
+  "bbox": {
+    "lon_min": 88.6,
+    "lon_max": 92.8,
+    "lat_min": 17.6,
+    "lat_max": 23.0
+  },
+  "analysis_grid": "thesis PFZ station network (2,125 points); fields are sampled to stations, never up-sampled",
+  "bundle_valid_hours": 9,
+  "stale_after_hours": 12,
+  "expire_after_hours": 30,
+  "depart_offsets_h": [
+    0,
+    12,
+    24
+  ],
+  "route_samples": 12,
+  "route_wet_min_fraction": 1.0,
+  "route_min_depth_m": 3,
+  "station_min_depth_m": 5,
+  "rep_point_step_deg": 0.6,
+  "idw": {
+    "k": 4,
+    "power": 2.0,
+    "max_distance_deg": 0.9,
+    "full_support_deg": 0.35
+  },
+  "openmeteo": {
+    "enabled": true,
+    "marine_url": "https://marine-api.open-meteo.com/v1/marine",
+    "weather_url": "https://api.open-meteo.com/v1/forecast",
+    "forecast_days": 8,
+    "chunk_size": 25,
+    "marine_hourly": [
+      "wave_height",
+      "wave_period",
+      "wave_direction",
+      "swell_wave_height",
+      "wind_wave_height",
+      "ocean_current_velocity",
+      "sea_surface_temperature"
+    ],
+    "weather_hourly": [
+      "wind_speed_10m",
+      "wind_gusts_10m",
+      "visibility",
+      "weather_code"
+    ],
+    "timeout_s": 40,
+    "attribution": "Weather data by Open-Meteo.com (CC BY 4.0); non-commercial use only.",
+    "forecast_hours": 168
+  },
+  "cmems": {
+    "enabled": true,
+    "max_product_age_h": 96,
+    "datasets": {
+      "phy_thetao": {
+        "dataset_id": "cmems_mod_glo_phy-thetao_anfc_0.083deg_P1D-m",
+        "variables": [
+          "thetao"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "phy_so": {
+        "dataset_id": "cmems_mod_glo_phy-so_anfc_0.083deg_P1D-m",
+        "variables": [
+          "so"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "phy_cur": {
+        "dataset_id": "cmems_mod_glo_phy-cur_anfc_0.083deg_P1D-m",
+        "variables": [
+          "uo",
+          "vo"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "phy_2d": {
+        "dataset_id": "cmems_mod_glo_phy_anfc_0.083deg_P1D-m",
+        "variables": [
+          "mlotst",
+          "zos"
+        ],
+        "depth": null
+      },
+      "bgc_pft": {
+        "dataset_id": "cmems_mod_glo_bgc-pft_anfc_0.25deg_P1D-m",
+        "variables": [
+          "chl",
+          "phyc"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "bgc_bio": {
+        "dataset_id": "cmems_mod_glo_bgc-bio_anfc_0.25deg_P1D-m",
+        "variables": [
+          "o2",
+          "nppv"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "bgc_nut": {
+        "dataset_id": "cmems_mod_glo_bgc-nut_anfc_0.25deg_P1D-m",
+        "variables": [
+          "no3",
+          "po4",
+          "si"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      },
+      "bgc_car": {
+        "dataset_id": "cmems_mod_glo_bgc-car_anfc_0.25deg_P1D-m",
+        "variables": [
+          "ph"
+        ],
+        "depth": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "attribution": "Generated using E.U. Copernicus Marine Service information (doi:10.48670/moi-00016, doi:10.48670/moi-00015)."
+  },
+  "bmd": {
+    "marine_warning_url": "https://server6.bmd.gov.bd/en/p/Marine-Warning",
+    "fishermen_forecast_url": "https://www.bmd.gov.bd/web/en/p/Fishermen-Forecast",
+    "record_path": "data/manual/bmd_bulletin.json",
+    "max_verification_age_h": 24,
+    "probe_timeout_s": 25,
+    "unverified_blocks": [
+      "S",
+      "C"
+    ],
+    "_unverified_note": "Classes that cannot be issued while the official BMD warning is unverified. Default ['S','C'] = no advisory at all (only NO-GO prohibitions/hazards remain). ['S'] would still show CAUTION. Do not remove 'S'."
+  },
+  "confidence": {
+    "_note": "C = min(components) - weakest-link, consistent with the non-compensatory design. C<0.3 withdraws the advisory; 0.3<=C<0.5 caps it at CAUTION.",
+    "withdraw_below": 0.3,
+    "caution_cap_below": 0.5,
+    "env_fresh_full_h": 36,
+    "env_fresh_zero_h": 96,
+    "calibration_factor": {
+      "calibrated": 1.0,
+      "experimental": 0.7
+    },
+    "lead_full_h": 48,
+    "lead_zero_h": 168,
+    "lead_floor": 0.5
+  },
+  "qc": {
+    "min_valid_hazard_points_fraction": 0.7,
+    "max_high_class_fraction": 0.6,
+    "min_wet_cells_with_pai_fraction": 0.5
+  }
+}
