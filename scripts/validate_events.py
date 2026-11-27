@@ -49,6 +49,54 @@ def block_boot(df, stat, B=2000, seed=1):
     return tuple(float(x) for x in np.percentile(out, [2.5, 97.5]))
 
 
+
+def seasonal_pai_values(thesis, stations, seasons, positions):
+    """Resolve seasonal PAI by position or station ID without inventing missing values.
+
+    Supports legacy arrays (PAI x1000) and explicitly labelled dictionaries.
+    Missing/invalid entries remain NaN. A dictionary may use station IDs or
+    zero-based position strings; station IDs take precedence.
+    """
+    payload = thesis.get("pai", {})
+    ids = stations.get("id", stations.get("station_id"))
+    if ids is None:
+        ids = list(range(1, len(stations["lat"]) + 1))
+    if len(ids) != len(stations["lat"]):
+        raise ValueError("Station ID and coordinate array lengths differ")
+    unit = str(thesis.get("unit", "")).lower()
+    fraction = any(token in unit for token in ("fraction", "0-1", "0 to 1"))
+    milliscale = "x1000" in unit or "1000" in unit
+    if not (fraction or milliscale):
+        raise ValueError("Unknown PAI unit: declare 'PAI x1000' or 'PAI fraction (0-1)'")
+    result = []
+    for season, pos in zip(seasons, positions):
+        pos = int(pos)
+        series = payload.get(season)
+        if series is None:
+            result.append(np.nan)
+            continue
+        if isinstance(series, list):
+            raw = series[pos] if 0 <= pos < len(series) else None
+        elif isinstance(series, dict):
+            sid = str(ids[pos])
+            # ID first; positional fallback only when the dictionary explicitly
+            # identifies itself as position-keyed.
+            if thesis.get("key_type") == "position":
+                raw = series.get(str(pos))
+            else:
+                raw = series.get(sid)
+        else:
+            raise ValueError(f"Unsupported seasonal PAI type for {season}: {type(series).__name__}")
+        try:
+            value = float(raw)
+        except (TypeError, ValueError):
+            value = float("nan")
+        if not np.isfinite(value) or value < 0:
+            result.append(np.nan)
+            continue
+        result.append(value if fraction else value / 1000.0)
+    return np.asarray(result, dtype=float)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--xlsx")
@@ -62,7 +110,7 @@ def main():
     xl = a.xlsx or next((ROOT / "data/raw").glob("*Commercial_Fisheries_PlotReady*.xlsx"))
     df = pd.read_excel(xl, engine="openpyxl")
     st = json.load(open(ROOT / "data/static/stations.json"))
-    th = json.load(open(ROOT / "data/static/thesis_pai_2025.json"))["pai"]
+    thesis = json.load(open(ROOT / "data/static/thesis_pai_2025.json"))
     slat, slon, sdep = np.array(st["lat"]), np.array(st["lon"]), np.array(st["depth_m"], float)
 
     # ---------------- data-quality diagnostics (honest reporting) -------------------------------------------------
@@ -93,7 +141,7 @@ def main():
     ev["km"] = D[np.arange(len(ev)), j]
     ev["st"] = j
     ev["depth"] = sdep[j]
-    ev["pai"] = [th[s][k] / 1000.0 if th[s][k] >= 0 else np.nan for s, k in zip(ev.season, ev.st)]
+    ev["pai"] = seasonal_pai_values(thesis, st, ev.season, ev.st)
     keep = (ev.km <= MAX_KM) & np.isfinite(ev.pai) & np.isfinite(ev.cpue)
     n_all = len(ev)
     ev = ev[keep].reset_index(drop=True)
